@@ -1,0 +1,12 @@
+<h2>Select a subdomain to manage charges</h2>
+<p>
+  <ul class="subdomains">
+    <% @spaces.each do |subdomain| %>
+      <li><%= link_to subdomain, space_path(id: subdomain)%></li>
+    <% end %>
+  </ul>
+  <% if @spaces.blank? %>
+    We're sorry, but you are not an administrator for any spaces.
+  <% end %>
+</p>
+

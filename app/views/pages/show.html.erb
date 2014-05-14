@@ -1,0 +1,49 @@
+<div>
+  <h2 class="space">
+    <%= @subdomain %>
+  </h2>
+
+  <% if @members.empty? %>
+    <div>
+      <p>There are no members registered in this space! Please come back when at least one member is registered.</p>
+    </div>
+  <% end %>
+
+  <div>
+    <p>All fields are required.</p>
+    <%= form_tag("/spaces/#{@subdomain}/charge", remote: true, method: "post", id: "chargeform", onsubmit: "return validate_and_post()") do %>
+      <div class="field">
+        <%= label_tag 'membership', "Member to charge" %><br />
+        <select name="membership", id="select_member">
+          <option value="">Select a member...</option>
+          <% unless @members.empty? %>
+            <%= @members.each do |member| %>
+              <option value="<%= member['id'] %>">
+                <%= member['address']['name'] %>
+              </option>
+            <% end %>
+          <% end %>
+        </select>
+      </div>
+
+      <div class="field">
+        <%= label_tag 'amount' %><br />
+        <%= number_field_tag 'amount', nil, step: 0.01 %><br />
+        <span class="quiet hint">Must be in English format, e.g. 20 or 19.99, not 19,99</span>
+      </div>
+
+      <div class="field">
+        <%= label_tag 'description' %><br />
+        <%= text_area_tag 'description', nil %>
+      </div>
+
+      <div class="field">
+        <% unless @members.empty? %>
+          <%= submit_tag 'Charge', class: "btn", id: "button", disable_with: "Saving..." %>
+        <% else %>
+          <%= submit_tag 'Charge', class: "btn", id: "button", disabled: true %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+<html>
+<head>
+<title> Dynamically create input fields- jQuery </title>
+<script  src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>        // Calling jQuery Library hosted on Google's CDN
+<script type="text/javascript">
+$(function() {
+var addDiv = $('#addinput');
+var i = $('#addinput p').size() + 1;
+var j = $('#addinput p').size() + 1;
+
+
+
+$('#addNew').live('click', function() {
+$('<p> Description :<input type="text" id="p_new" size="40" name="p_new_' + i +'" value="" placeholder="I am New" /><a href="#" id="remNew">Remove</a> <br> <br>Amount:<input type="text" id="d_new" size="40" name="d_new_' + j +'" value="" placeholder="I am New" /><a href="#" id="remNew"></p>').appendTo(addDiv);
+i++;
+j++;
+
+return false;
+});
+
+$('#remNew').live('click', function() {
+if( i > 2  && j>2) {
+$(this).parents('p').remove();
+$(this).parents('p').remove();
+i--;
+j--;
+}
+return false;
+});
+});
+
+</script>
+
+</head>
+<body>
+<h2>Dynammically Add Another Input Box</h2>
+<%= form_tag("/spaces/#{@subdomain}/charge",method: "post", id: "chargeform") do %>
+<div id="addinput">
+<p>
+<a href="#" id="addNew">Add</a>
+<input type ="submit">
+
+</p>
+</div>
+<% end %>
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Quickcharge</title>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div class="container">
+
+  <h1 class="logo">
+    <% if session[:token] == nil %>
+      <%= link_to "QuickCharge", "/auth/cobot" %>
+    <% elsif session[:token] != nil %>
+      <%= link_to "QuickCharge", "/spaces" %>
+    <% end %>
+  </h1>
+
+  <div class="header">
+    <nav>
+    <% if session[:token] == nil %>
+      <%= link_to "Sign in", "/auth/cobot" %>
+    <% elsif session[:token] != nil %>
+      <%= link_to "Spaces", spaces_path %>
+      <%= link_to "Sign out", signout_path %>
+    <% end %>
+    </nav>
+  </div>
+
+  <div id="flashmsg">
+  <% flash.each do |flash_type, flash_message| %>
+    <%= content_tag(:div, flash_message, :class => "flash #{flash_type}") %>
+  <% end %>
+  </div>
+
+  <div class="main">
+    <%= yield %>
+  </div>
+
+</div>
+
+</body>
+</html>

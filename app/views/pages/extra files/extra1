@@ -1,0 +1,299 @@
+<html>
+<head>
+  <script type="text/javascript">
+$(function() {
+var addDiv = $('#addinput');
+
+$('#addNew').on('click', function() {
+  var p = $("<p class='temp'></p>");
+    p.append(
+      $("<span>Description:</span>"),
+      $("<input type=\"text\" name=\"des[]\"></input>"),
+      $("<span>Amount:</span>"),
+      $("<input type=\"text\" name=\"am[]\"></input>"),
+      $("<a>remove</a>").on("click", function(){ p.remove(); })
+    )
+
+p.appendTo(addDiv);
+i++;
+j++;
+
+return false;
+});
+
+});
+
+</script>
+
+</head>
+<body>
+          
+<div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Record payments</h4>
+      </div>
+      <div class="modal-body">
+
+
+  <% unless @records.empty %>
+
+
+      <% if @charge.empty? %>
+    <div>
+      <p>There are no members registered in this space! Please come back when at least one member is registered.</p>
+    </div>
+  <% end %>
+        
+  <% unless @invo.empty? %>
+  <% @invo.each do |invo| %>
+    <% if invo['membership_id']== @user %>
+    <% if records['id'] == invo['id'] %>             <!-- records
+
+
+    
+     <h2><%= records['paid_at'] %> PAST</h2>
+     <table border="1">
+    
+    <% invo['items'].each do |item| %>
+      
+      
+      
+      <tr>
+      
+      <td><%= item['description'] %></td>
+      <td><%= item['amount'] %></td>
+      </tr>
+      <% end %>
+     
+    <!--  <tr>
+      <td> Total Amount Due</td>
+      <td><%= invo['payable_amount'].to_f %> </td>
+      </tr>
+      <tr> -->
+      <td> Total Amount Paid </td>
+      <td><%= records['amount'].to_f %> </td>
+      </tr>
+      
+    </table>
+    <% end %>
+  <% end %>
+  <% end %>
+  <% end %>
+
+
+  
+  
+    <% unless @charge.empty? %>
+    <h5> Current Charges </h5>
+    <table border= "1">
+    <% @charge.each do |charge| %>
+
+    
+    <tr>
+     <td> <%= charge['description'] %> </td>
+     <td><%= charge['amount'] %> </td>
+     
+    </tr>
+    <% end %>
+
+  <% end %>
+  
+  </table>
+  </div>
+
+<%= form_tag("/spaces/#{@subdomain}/charge") do %>
+<div id="addinput">
+<p>
+<a href="#" id="addNew">Add</a>
+
+<%= hidden_field_tag  'membership',@user %>
+
+</p>
+</div>
+
+
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+      <% end %>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+
+</p>
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MEMBERSHIPSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+
+
+
+
+<div>
+  <h2 class="space">
+    <%= @subdomain %>
+  </h2>
+
+  <% if @membership.empty? %>
+    <div>
+      <p>There are no members registered in this space! Please come back when at least one member is registered.</p>
+    </div>
+  <% end %>
+
+  
+
+  <table>
+    <tr>
+      <th>Id </th>
+      <th>Name </th>
+    </tr>
+
+  <% unless @membership.empty? %>
+    <%= @membership.each do |membership| %>
+    <tr>
+     <td> <%= membership['id'] %> </td>
+     <td><%= membership['name'] %> </td>
+     <td><%= link_to("edit",{:action => 'charges', :id => @subdomain , :uid => membership['id']}) %></td>
+     <td><%= link_to("Invoices",{:action => 'invoices', :id => @subdomain }) %></td>
+
+    </tr>
+    <% end %>
+  <% end %>
+  </table>
+\
+
+
+
+
+
+
+
+
+
+
+
+
+
+11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+@records= Hash.new
+    @records = {"id" => "1" ,"invoice_id" => "101", "note" => "optional", "paid_at" => "2014-01-25" , "amount" => "200" }
+    @invoice = Hash.new
+    @invoice = {"id" => "101" , "description" => "printer", "amount" => "100", "payable_amount"=>"100" , "membership-id"=>"1" 
+
+
+
+
+
+
+
+    000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+
+
+
+
+
+
+
+    /*!
+ * iCheck v1.0.1, http://git.io/arlzeA
+ * =================================
+ * Powerful jQuery and Zepto plugin for checkboxes and radio buttons customization
+ *
+ * (c) 2013 Damir Sultanov, http://fronteed.com
+ * MIT Licensed
+ */
+/* iCheck plugin Minimal skin, black
+----------------------------------- */
+.icheckbox_minimal,
+.iradio_minimal {
+  display: inline-block;
+  *display: inline;
+  vertical-align: middle;
+  margin: 0;
+  padding: 0;
+  width: 18px;
+  height: 18px;
+  background: rgba(255, 255, 255, 0.7) url(iCheck/minimal/minimal.png) no-repeat;
+  border: none;
+  cursor: pointer;
+}
+.icheckbox_minimal {
+  background-position: 0 0;
+}
+.icheckbox_minimal.hover {
+  background-position: -20px 0;
+}
+.icheckbox_minimal.checked {
+  background-position: -40px 0;
+}
+.icheckbox_minimal.disabled {
+  background-position: -60px 0;
+  cursor: default;
+}
+.icheckbox_minimal.checked.disabled {
+  background-position: -80px 0;
+}
+.iradio_minimal {
+  background-position: -100px 0;
+}
+.iradio_minimal.hover {
+  background-position: -120px 0;
+}
+.iradio_minimal.checked {
+  background-position: -140px 0;
+}
+.iradio_minimal.disabled {
+  background-position: -160px 0;
+  cursor: default;
+}
+.iradio_minimal.checked.disabled {
+  background-position: -180px 0;
+}
+
+
+
+/* Retina support */
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (-moz-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (min-device-pixel-ratio: 1.5) {
+  .icheckbox_minimal,
+  .iradio_minimal {
+    background-image: url('iCheck/minimal/minimal@2x.png');
+    -webkit-background-size: 200px 20px;
+    background-size: 200px 20px;
+  }
+}
+.pace .pace-progress {
+  background: #00c0ef;
+  position: fixed;
+  z-index: 2000;
+  top: 0;
+  left: 0;
+  height: 2px;
+  -webkit-transition: width 1s;
+  -moz-transition: width 1s;
+  -o-transition: width 1s;
+  transition: width 1s;
+}
+.pace-inactive {
+  display: none;
+}

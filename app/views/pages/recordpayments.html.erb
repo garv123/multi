@@ -1,0 +1,122 @@
+<html>
+<head>
+  <script type="text/javascript">
+$(function() {
+var addDiv = $('#addinput');
+
+$('#addNew').on('click', function() {
+  var p = $("<p class='temp'></p>");
+    p.append(
+      $("<span>Description of payment:</span>"),
+      $("<input type=\"text\" name=\"des[]\"></input>"),
+      $("<span>Paid at:</span>"),
+      $("<input type=\"text\" name=\"paid_at[]\"></input>"),
+      $("<span>Amount:</span>"),
+      $("<input type=\"text\" name=\"am[]\"></input>"),
+
+      $("<a>remove</a>").on("click", function(){ p.remove(); })
+    )
+
+p.appendTo(addDiv);
+i++;
+j++;
+
+return false;
+});
+
+});
+
+</script>
+
+</head>
+<body>
+  
+<div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+      <% if @invo.empty? %>
+    <div>
+      <p>There are no members registered in this space! Please come back when at least one member is registered.</p>
+    </div>
+  <% end %>
+        
+  <% unless @invo.empty? %>
+  <% @invo.each do |invo| %>
+    <% if invo['membership_id']== @user %>
+    
+     <h2><%= invo['created_at'] %> PAST</h2>
+      
+     <table border="1">
+    
+    <% @payment.each do |payment| %>
+    <% if payment['invoice_id']== invo['id'] %>
+      
+      
+      
+      <tr>
+      <td> Note </td>
+      <td><%= payment['note'] %></td>
+      </tr>
+      <tr>
+      <td> Paid At </td>
+      <td><%= payment['paid_at'] %></td>
+      </tr>
+      <tr>
+      <td>Payment Amount </td>
+      <td><%= payment['amount'] %></td>
+      </tr>
+      <% end %>
+      <% end %>
+      <tr>
+      <td> <b>Total Amount </b></td>
+      <td><b><%= invo['total_amount'].to_f %> </b></td>
+      </tr>
+       <tr>
+      <td> Total Amount Due</td>
+      <td><%= invo['payable_amount'].to_f %> </td>
+      </tr>
+      <tr>
+      <td> Total Amount Paid </td>
+      <td> <%= invo['total_amount'].to_f - invo['payable_amount'].to_f %> </td>
+      </tr>
+     
+      
+    </table>
+    
+    <% end %>
+  <% end %>
+  <% end %>
+
+  <%= form_tag("/pages/addrecordpayment") do %>
+<div id="addinput">
+<p>
+
+<%= hidden_field_tag  'subdomain',@subdomain %>
+<%= hidden_field_tag  'invoice_number',@invoice_number %>
+
+
+
+</p>
+</div>
+<a href="#" id="addNew">Add</a>
+
+
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+      <% end %>
+     
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+
+</p>
+</div>
+
+</body>
+  </html>

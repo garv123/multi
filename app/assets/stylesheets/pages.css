@@ -1,0 +1,39 @@
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+
+
+div.field {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.quiet {
+  color: #707070;
+}
+
+.hint {
+  font-size: 90%;
+}
+
+ul.subdomains {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.subdomains > li {
+  padding: 0 0 0.416666em;
+  margin-bottom: 1em;
+  border-bottom: 1px dotted #B9B997;
+}
+
+.subdomains > li p:last-child {
+  margin-bottom: .5em;
+}
+
+.space {
+  margin-bottom: 1em;
+}

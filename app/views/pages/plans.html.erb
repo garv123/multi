@@ -1,0 +1,28 @@
+<div>
+  <h2 class="space">
+    <%= @subdomain %>
+  </h2>
+
+  <% if @plan.empty? %>
+    <div>
+      <p>There are no members registered in this space! Please come back when at least one member is registered.</p>
+    </div>
+  <% end %>
+
+  <table>
+    <tr>
+      <th>Id </th>
+      <th>Name </th>
+    </tr>
+
+  <% unless @plan.empty? %>
+    <%= @plan.each do |plan| %>
+    <tr>
+     <td> <%= plan['id'] %> </td>
+     <td><%= plan['name'] %> </td>
+    </tr>
+    <% end %>
+  <% end %>
+  </table>
+
+  

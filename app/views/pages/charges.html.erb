@@ -1,0 +1,30 @@
+<div>
+  <h2 class="space">
+    <%= @subdomain %>
+  </h2>
+
+  <% if @charge.empty? %>
+    <div>
+      <p>There are no members registered in this space! Please come back when at least one member is registered.</p>
+    </div>
+  <% end %>
+
+  <table>
+    <tr>
+      <th>Description</th>
+      <th>Amount</th>
+      <th> Currency </th>
+    </tr>
+
+  <% unless @charge.empty? %>
+    <%= @charge.each do |charge| %>
+    <tr>
+     <td> <%= charge['description'] %> </td>
+     <td><%= charge['amount'] %> </td>
+     <td><%= charge['currency'] %></td>
+    </tr>
+    <% end %>
+  <% end %>
+  </table>
+
+  
